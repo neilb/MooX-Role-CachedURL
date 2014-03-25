@@ -5,10 +5,12 @@ use Moo::Role;
 use File::HomeDir;
 use File::Spec::Functions 'catfile';
 use HTTP::Tiny;
+use Time::Duration::Parse;
 use Carp;
 
-has 'url'  => (is => 'ro');
-has 'path' => (is => 'rw');
+has 'url'     => (is => 'ro');
+has 'path'    => (is => 'rw');
+has 'expires' => (is => 'ro');
 
 sub BUILD
 {
@@ -23,6 +25,12 @@ sub BUILD
            $classid  =~ s/::/-/g;
 
         $self->path( catfile(File::HomeDir->my_dist_data( $classid, { create => 1 } ), $basename) );
+
+        if (defined($self->expires) && -f $self->path) {
+            my $max_age_in_seconds = parse_duration($self->expires);
+            return unless time() - $max_age_in_seconds > (stat($self->path))[9];
+        }
+
         my $response;
         eval { $response = HTTP::Tiny->new()->mirror($self->url, $self->path) };
         if (not $response->{success}) {
@@ -61,6 +69,23 @@ It caches the file locally, then provides a mechanism for iterating over all use
 
 If you look right now, you'll notice that none of those modules use this role yet;
 I'll be gradually refactoring them once this role is on CPAN.
+
+=head1 ATTRIBUTES
+
+=head2 url
+
+This specifies the URL that should be cached locally.
+It should be over-ridden in the composing class, as shown in the SYNOPSIS above.
+
+=head2 expires
+
+Specifies the expiry time of the local copy, in seconds.
+We won't even look for a new remote copy if the cached copy is younger than this.
+
+You can specify the expiry time using any of the notations supported by L<Time::Duration::Parse>.
+For example:
+
+ expires => '2 hours',
 
 =head1 REPOSITORY
 
