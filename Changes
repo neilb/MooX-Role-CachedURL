@@ -5,6 +5,7 @@ Revision history for Perl module MooX::Role::CachedURL
       Previously 'path' was used for both the local cache path,
       and for your to specify your own local file. That meant you
       couldn't specify your own path for local caching.
+    - Added [Git::Tag] and [Git::Push] to dist.ini
 
 0.03 2014-03-29
     - Changed the 'expires' attribute to 'max_age', which feels
