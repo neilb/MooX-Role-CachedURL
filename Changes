@@ -1,5 +1,8 @@
 Revision history for Perl module MooX::Role::CachedURL
 
+0.07 2015-11-04 NEILB
+    - Updated github repo URL after changing my github username
+
 0.06 2014-05-05
     - Changed tests 2 and 3 to use a cache path in t/.
       Two of the tests were reported as failing on some CPAN Testers

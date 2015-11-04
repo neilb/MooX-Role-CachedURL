@@ -164,7 +164,7 @@ using L<PerlIO::gzip>.
 
 =head1 REPOSITORY
 
-L<https://github.com/neilbowers/MooX-Role-CachedURL>
+L<https://github.com/neilb/MooX-Role-CachedURL>
 
 =head1 AUTHOR
 
