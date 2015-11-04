@@ -86,11 +86,11 @@ MooX::Role::CachedURL - a role providing a locally cached copy of a remote file
  use Moo;
  with 'MooX::Role::CachedURL';
  has '+url' => (default => sub { 'http://www.cpan.org/robots.txt' });
- 
+
  sub my_method {
     my $self = shift;
     my $fh   = $self->open_file;
- 
+
     while (<$fh>) {
         ...
     }
@@ -101,7 +101,7 @@ Then in the user of MyClass:
 
  use MyClass;
  my $object = MyClass->new(max_age => '2 days');
-  
+
  print "local file is ", $object->cache_path, "\n";
 
 =head1 DESCRIPTION
