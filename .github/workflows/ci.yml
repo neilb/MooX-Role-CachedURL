@@ -33,12 +33,17 @@ jobs:
         cpanm -v
         cpanm --notest Dist::Zilla
         cpanm --notest Dist::Zilla::Plugin::GithubMeta
+        cpanm --notest Dist::Zilla::Plugin::Git::Tag
 
     - name: Install Modules
       run: |
         dzil listdeps --missing | cpanm --notest
         dzil authordeps --missing | cpanm --notest
-        cpanm Test::File File::HomeDir Time::Duration::Parse
+        cpanm Test::File
+        cpanm File::HomeDir
+        cpanm Time::Duration::Parse
+        cpanm File::Touch
+        cpanm PerlIO::gzip
 
     - name: Run tests
       run: |
