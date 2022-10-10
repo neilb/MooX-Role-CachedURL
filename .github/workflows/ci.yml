@@ -38,7 +38,7 @@ jobs:
       run: |
         dzil listdeps --missing | cpanm --notest
         dzil authordeps --missing | cpanm --notest
-        cpanm Test::File File::HomeDir
+        cpanm Test::File File::HomeDir Time::Duration::Parse
 
     - name: Run tests
       run: |
