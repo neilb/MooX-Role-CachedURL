@@ -32,12 +32,13 @@ jobs:
       run: |
         cpanm -v
         cpanm --notest Dist::Zilla
+        cpanm --notest Dist::Zilla::Plugin::GithubMeta
 
     - name: Install Modules
       run: |
         dzil listdeps --missing | cpanm --notest
         dzil authordeps --missing | cpanm --notest
-        cpanm Test::File
+        #cpanm Test::File
 
     - name: Run tests
       run: |
